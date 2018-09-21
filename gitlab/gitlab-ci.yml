@@ -29,13 +29,16 @@ stages:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - export GRADLE_OPTS='-Dorg.gradle.daemon=false'
   script:
-    - ./gradlew test
+    - ./gradlew test jacocoTestReport
   cache:
     key: $CI_JOB_NAME
     paths:
       - .gradle/wrapper
       - .gradle/caches
       - build # Actually, caching build does not work because of files' access / modification time. Probably will be working one day.
+  artifacts:
+    reports:
+      junit: model/build/test-results/test/TEST-*.xml
 
 build:openjdk:8:
   extends: .build
