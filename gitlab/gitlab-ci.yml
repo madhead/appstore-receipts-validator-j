@@ -1,0 +1,36 @@
+---
+stages:
+  - build
+  - test
+  - upload
+  - deploy
+
+.build:
+  stage: build
+  image: openjdk:8
+  # TODO: Move to `variables` section when possible.
+  # https://gitlab.com/gitlab-org/gitlab-runner/issues/1809
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - export GRADLE_OPTS='-Dorg.gradle.daemon=false'
+  script:
+    - ./gradlew assemble
+  cache:
+    key: $CI_JOB_NAME
+    paths:
+      - .gradle/wrapper
+      - .gradle/caches
+      - build # Actually, caching build does not work because of files' access / modification time. Probably will be working one day.
+  artifacts:
+    name: $CI_COMMIT_SHA-$CI_JOB_NAME
+    paths:
+      - build/libs/packt4free-all.jar
+    expire_in: 1 hour
+
+build:openjdk:8:
+  extends: .build
+  image: openjdk:8
+
+build:openjdk:10:
+  extends: .build
+  image: openjdk:8
