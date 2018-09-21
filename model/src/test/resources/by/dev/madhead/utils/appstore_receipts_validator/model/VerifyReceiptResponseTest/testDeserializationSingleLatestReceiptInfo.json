@@ -1,0 +1,99 @@
+{
+    "status": 0,
+    "receipt": {
+        "bundle_id": "bundle_id",
+        "application_version": "42.42",
+        "in_app": [
+            {
+                "quantity": "42",
+                "product_id": "product_id",
+                "transaction_id": "transaction_id",
+                "original_transaction_id": "original_transaction_id",
+                "purchase_date": "2018-09-23 03:42:42 Etc/GMT",
+                "original_purchase_date": "2017-09-23 03:42:42 Etc/GMT",
+                "expires_date": "2019-09-23 03:42:42 Etc/GMT",
+                "expiration_intent": "1",
+                "is_in_billing_retry_period": "1",
+                "is_trial_period": "true",
+                "is_in_intro_offer_period": "false",
+                "cancellation_date": "2018-09-22 03:42:42 Etc/GMT",
+                "cancellation_reason": "0",
+                "app_item_id": "app_item_id",
+                "version_external_identifier": "42.42",
+                "web_order_line_item_id": "web_order_line_item_id",
+                "auto_renew_status": "1",
+                "auto_renew_product_id": "auto_renew_product_id",
+                "price_consent_status": "1"
+            }
+        ],
+        "original_application_version": "41.41",
+        "receipt_creation_date": "2018-09-23 03:42:42 Etc/GMT",
+        "expiration_date": "2019-09-23 03:42:42 Etc/GMT",
+        "unknown_field": "unknown_value"
+    },
+    "latest_receipt": "latest_receipt",
+    "latest_receipt_info": {
+        "bundle_id": "bundle_id",
+        "application_version": "42.42",
+        "in_app": [
+            {
+                "quantity": "42",
+                "product_id": "product_id",
+                "transaction_id": "transaction_id",
+                "original_transaction_id": "original_transaction_id",
+                "purchase_date": "2018-09-23 03:42:42 Etc/GMT",
+                "original_purchase_date": "2017-09-23 03:42:42 Etc/GMT",
+                "expires_date": "2019-09-23 03:42:42 Etc/GMT",
+                "expiration_intent": "1",
+                "is_in_billing_retry_period": "1",
+                "is_trial_period": "true",
+                "is_in_intro_offer_period": "false",
+                "cancellation_date": "2018-09-22 03:42:42 Etc/GMT",
+                "cancellation_reason": "0",
+                "app_item_id": "app_item_id",
+                "version_external_identifier": "42.42",
+                "web_order_line_item_id": "web_order_line_item_id",
+                "auto_renew_status": "1",
+                "auto_renew_product_id": "auto_renew_product_id",
+                "price_consent_status": "1"
+            }
+        ],
+        "original_application_version": "41.41",
+        "receipt_creation_date": "2018-09-23 03:42:42 Etc/GMT",
+        "expiration_date": "2019-09-23 03:42:42 Etc/GMT",
+        "unknown_field": "unknown_value"
+    },
+    "latest_expired_receipt_info": {
+        "bundle_id": "bundle_id",
+        "application_version": "42.42",
+        "in_app": [
+            {
+                "quantity": "42",
+                "product_id": "product_id",
+                "transaction_id": "transaction_id",
+                "original_transaction_id": "original_transaction_id",
+                "purchase_date": "2018-09-23 03:42:42 Etc/GMT",
+                "original_purchase_date": "2017-09-23 03:42:42 Etc/GMT",
+                "expires_date": "2019-09-23 03:42:42 Etc/GMT",
+                "expiration_intent": "1",
+                "is_in_billing_retry_period": "1",
+                "is_trial_period": "true",
+                "is_in_intro_offer_period": "false",
+                "cancellation_date": "2018-09-22 03:42:42 Etc/GMT",
+                "cancellation_reason": "0",
+                "app_item_id": "app_item_id",
+                "version_external_identifier": "42.42",
+                "web_order_line_item_id": "web_order_line_item_id",
+                "auto_renew_status": "1",
+                "auto_renew_product_id": "auto_renew_product_id",
+                "price_consent_status": "1"
+            }
+        ],
+        "original_application_version": "41.41",
+        "receipt_creation_date": "2018-09-23 03:42:42 Etc/GMT",
+        "expiration_date": "2019-09-23 03:42:42 Etc/GMT",
+        "unknown_field": "unknown_value"
+    },
+    "is-retryable": "true",
+    "unknown_field": "unknown_value"
+}
