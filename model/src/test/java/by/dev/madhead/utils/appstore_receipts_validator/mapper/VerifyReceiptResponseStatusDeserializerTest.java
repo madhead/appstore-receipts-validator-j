@@ -1,6 +1,6 @@
-package by.dev.madhead.utils.appstore_receipts_validator.model;
+package by.dev.madhead.utils.appstore_receipts_validator.mapper;
 
-import by.dev.madhead.utils.appstore_receipts_validator.mapper.ObjectMapperFactory;
+import by.dev.madhead.utils.appstore_receipts_validator.model.VerifyReceiptResponse;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -69,7 +69,7 @@ public class VerifyReceiptResponseStatusDeserializerTest {
     }
 
     @ParameterizedTest
-    @EnumSource(VerifyReceiptResponse.Status.class)
+    @EnumSource(value = VerifyReceiptResponse.Status.class, mode = EnumSource.Mode.EXCLUDE, names = {"WRONG_ENVIRONMENT", "INTERNAL_ERROR"})
     public void testDeserialization(final VerifyReceiptResponse.Status value) throws Exception {
         Assertions.assertEquals(
             new VerifyReceiptResponseStatusHolder(
@@ -80,15 +80,45 @@ public class VerifyReceiptResponseStatusDeserializerTest {
     }
 
     @Test
-    public void testDeserializationUnknownValue() throws Exception {
-        Assertions.assertThrows(
-            JsonMappingException.class,
-            () -> objectMapper.readValue(getClass().getResource("VerifyReceiptResponseStatusDeserializerTest/testDeserializationUnknownValue.json"), VerifyReceiptResponseStatusHolder.class)
+    public void testDeserializationWrongEnvironment() throws Exception {
+        Assertions.assertEquals(
+            new VerifyReceiptResponseStatusHolder(
+                VerifyReceiptResponse.Status.WRONG_ENVIRONMENT
+            ),
+            objectMapper.readValue(getClass().getResource("VerifyReceiptResponseStatusDeserializerTest/testDeserializationWrongEnvironment1.json"), VerifyReceiptResponseStatusHolder.class)
+        );
+        Assertions.assertEquals(
+            new VerifyReceiptResponseStatusHolder(
+                VerifyReceiptResponse.Status.WRONG_ENVIRONMENT
+            ),
+            objectMapper.readValue(getClass().getResource("VerifyReceiptResponseStatusDeserializerTest/testDeserializationWrongEnvironment2.json"), VerifyReceiptResponseStatusHolder.class)
         );
     }
 
     @Test
-    public void testDeserializationInvalidValue() throws Exception {
+    public void testDeserializationInternalError() throws Exception {
+        Assertions.assertEquals(
+            new VerifyReceiptResponseStatusHolder(
+                VerifyReceiptResponse.Status.INTERNAL_ERROR
+            ),
+            objectMapper.readValue(getClass().getResource("VerifyReceiptResponseStatusDeserializerTest/testDeserializationInternalError.json"), VerifyReceiptResponseStatusHolder.class)
+        );
+    }
+
+    @Test
+    public void testDeserializationUnknownValue() {
+        Assertions.assertThrows(
+            JsonMappingException.class,
+            () -> objectMapper.readValue(getClass().getResource("VerifyReceiptResponseStatusDeserializerTest/testDeserializationUnknownValue1.json"), VerifyReceiptResponseStatusHolder.class)
+        );
+        Assertions.assertThrows(
+            JsonMappingException.class,
+            () -> objectMapper.readValue(getClass().getResource("VerifyReceiptResponseStatusDeserializerTest/testDeserializationUnknownValue2.json"), VerifyReceiptResponseStatusHolder.class)
+        );
+    }
+
+    @Test
+    public void testDeserializationInvalidValue() {
         Assertions.assertThrows(
             JsonMappingException.class,
             () -> objectMapper.readValue(getClass().getResource("VerifyReceiptResponseStatusDeserializerTest/testDeserializationInvalidValue.json"), VerifyReceiptResponseStatusHolder.class)

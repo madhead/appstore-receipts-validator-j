@@ -1,6 +1,6 @@
-package by.dev.madhead.utils.appstore_receipts_validator.model;
+package by.dev.madhead.utils.appstore_receipts_validator.mapper;
 
-import by.dev.madhead.utils.appstore_receipts_validator.mapper.ObjectMapperFactory;
+import by.dev.madhead.utils.appstore_receipts_validator.model.InApp;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -80,7 +80,7 @@ public class InAppPriceConsentStatusDeserializerTest {
     }
 
     @Test
-    public void testDeserializationUnknownValue() throws Exception {
+    public void testDeserializationUnknownValue() {
         Assertions.assertThrows(
             JsonMappingException.class,
             () -> objectMapper.readValue(getClass().getResource("InAppPriceConsentStatusDeserializerTest/testDeserializationUnknownValue.json"), PriceConsentStatusHolder.class)
@@ -88,7 +88,7 @@ public class InAppPriceConsentStatusDeserializerTest {
     }
 
     @Test
-    public void testDeserializationInvalidValue() throws Exception {
+    public void testDeserializationInvalidValue() {
         Assertions.assertThrows(
             JsonMappingException.class,
             () -> objectMapper.readValue(getClass().getResource("InAppPriceConsentStatusDeserializerTest/testDeserializationInvalidValue.json"), PriceConsentStatusHolder.class)

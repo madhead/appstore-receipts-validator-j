@@ -1,5 +1,6 @@
 plugins {
     `java-library`
+    jacoco
 }
 
 dependencies {
@@ -13,6 +14,10 @@ dependencies {
     testImplementation("org.skyscreamer:jsonassert")
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+}
+
+jacoco {
+    toolVersion = "0.8.2"
 }
 
 tasks {
