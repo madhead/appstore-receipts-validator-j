@@ -17,7 +17,7 @@ stages:
     paths:
       - .gradle/wrapper
       - .gradle/caches
-      - build # Actually, caching build does not work because of files' access / modification time. Probably will be working one day.
+      - model/build # Actually, caching build does not work because of files' access / modification time. Probably will be working one day.
 
 # Run unit tests.
 # Actually, unit tests parse https://www.packtpub.com/packt/offers/free-learning, so it is not "true" unit tests.
@@ -36,23 +36,23 @@ stages:
     paths:
       - .gradle/wrapper
       - .gradle/caches
-      - build # Actually, caching build does not work because of files' access / modification time. Probably will be working one day.
+      - model/build # Actually, caching build does not work because of files' access / modification time. Probably will be working one day.
   artifacts:
     reports:
       junit: model/build/test-results/test/TEST-*.xml
 
-build:openjdk:8:
+build@openjdk:8:
   extends: .build
   image: openjdk:8
 
-build:openjdk:10:
+build@openjdk:10:
   extends: .build
   image: openjdk:10
 
-unit:openjdk:8:
+unit@openjdk:8:
   extends: .unit
   image: openjdk:8
 
-unit:openjdk:10:
+unit@openjdk:10:
   extends: .unit
   image: openjdk:10
