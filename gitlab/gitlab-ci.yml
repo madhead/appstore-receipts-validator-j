@@ -1,0 +1,50 @@
+---
+stages:
+  - build
+  - test
+
+.build:
+  stage: build
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - export GRADLE_OPTS='-Dorg.gradle.daemon=false'
+  script:
+    - ./gradlew assemble
+  cache:
+    key: $CI_JOB_NAME
+    paths:
+      - .gradle/wrapper
+      - .gradle/caches
+
+.unit:
+  stage: test
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - export GRADLE_OPTS='-Dorg.gradle.daemon=false'
+  script:
+    - ./gradlew test jacocoTestReport
+    - bash <(curl -s https://codecov.io/bash)
+  cache:
+    key: $CI_JOB_NAME
+    paths:
+      - .gradle/wrapper
+      - .gradle/caches
+  artifacts:
+    reports:
+      junit: model/build/test-results/test/TEST-*.xml
+
+build@openjdk:8:
+  extends: .build
+  image: openjdk:8
+
+build@openjdk:10:
+  extends: .build
+  image: openjdk:10
+
+unit@openjdk:8:
+  extends: .unit
+  image: openjdk:8
+
+unit@openjdk:10:
+  extends: .unit
+  image: openjdk:10
