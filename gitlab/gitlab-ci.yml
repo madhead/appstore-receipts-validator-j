@@ -30,7 +30,7 @@ stages:
     - export GRADLE_OPTS='-Dorg.gradle.daemon=false'
   script:
     - ./gradlew test jacocoTestReport
-    - bash <(curl -s https://codecov.io/bash)
+    - bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
   cache:
     key: $CI_JOB_NAME
     paths:
