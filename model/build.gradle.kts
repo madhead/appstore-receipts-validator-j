@@ -24,4 +24,10 @@ tasks {
     val test by getting(Test::class) {
         useJUnitPlatform()
     }
+
+    val jacocoTestReport by getting(JacocoReport::class) {
+        reports {
+            xml.setEnabled(true)
+        }
+    }
 }
