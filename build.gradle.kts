@@ -7,6 +7,7 @@ plugins {
 
 subprojects {
     apply<DependencyManagementPlugin>()
+    apply<MavenPublishPlugin>()
 
     repositories {
         jcenter()

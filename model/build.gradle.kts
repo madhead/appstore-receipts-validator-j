@@ -21,6 +21,20 @@ jacoco {
     toolVersion = "0.8.2"
 }
 
+publishing {
+    publications {
+        val main by creating(MavenPublication::class) {
+            from(components["java"])
+
+            val sourcesJar by tasks
+            val javadocJar by tasks
+
+            artifact(sourcesJar)
+            artifact(javadocJar)
+        }
+    }
+}
+
 tasks {
     val test by getting(Test::class) {
         useJUnitPlatform()
@@ -30,5 +44,17 @@ tasks {
         reports {
             xml.setEnabled(true)
         }
+    }
+
+    val sourcesJar by creating(Jar::class) {
+        from(sourceSets["main"].allJava)
+        classifier = "sources"
+    }
+
+    val javadocJar by creating(Jar::class) {
+        val javadoc by tasks
+
+        from(javadoc)
+        classifier = "javadoc"
     }
 }
