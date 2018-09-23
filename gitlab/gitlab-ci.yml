@@ -21,9 +21,6 @@ stages:
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - export GRADLE_OPTS='-Dorg.gradle.daemon=false'
-  script:
-    - ./gradlew test jacocoTestReport
-    - bash <(curl -s https://codecov.io/bash)
   cache:
     key: $CI_JOB_NAME
     paths:
@@ -44,7 +41,12 @@ build@openjdk:10:
 unit@openjdk:8:
   extends: .unit
   image: openjdk:8
+  script:
+    - ./gradlew test jacocoTestReport
+    - bash <(curl -s https://codecov.io/bash)
 
 unit@openjdk:10:
   extends: .unit
   image: openjdk:10
+  script:
+    - ./gradlew test

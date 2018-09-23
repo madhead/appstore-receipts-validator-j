@@ -6,6 +6,7 @@ plugins {
 dependencies {
     api("com.fasterxml.jackson.core:jackson-annotations")
     api("com.fasterxml.jackson.core:jackson-databind")
+    api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 
     implementation("com.google.guava:guava")
 
