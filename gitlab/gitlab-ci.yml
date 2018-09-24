@@ -2,6 +2,7 @@
 stages:
   - build
   - test
+  - publish
 
 .build:
   stage: build
@@ -50,3 +51,11 @@ unit@openjdk:10:
   image: openjdk:10
   script:
     - ./gradlew test
+
+bintray:
+  stage: publish
+  image: openjdk:8
+  script:
+    - gradlew bintrayUpload
+  only:
+    - master

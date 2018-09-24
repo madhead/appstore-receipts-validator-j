@@ -1,3 +1,5 @@
+import com.jfrog.bintray.gradle.BintrayExtension
+
 plugins {
     `java-library`
     jacoco
@@ -33,6 +35,20 @@ publishing {
             artifact(javadocJar)
         }
     }
+}
+
+bintray {
+    publish = true
+    setPublications("main")
+    pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
+        repo = "maven"
+        name = "${project.group}:${project.name}"
+        setLicenses("LGPL-3.0")
+        vcsUrl = "https://gitlab.com/madhead/appstore-receipts-validator-j"
+        version(delegateClosureOf<BintrayExtension.VersionConfig> {
+            name = project.version.toString()
+        })
+    })
 }
 
 tasks {
