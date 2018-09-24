@@ -56,6 +56,6 @@ bintray:
   stage: publish
   image: openjdk:8
   script:
-    - gradlew bintrayUpload
+    - ./gradlew bintrayUpload
   only:
     - master
