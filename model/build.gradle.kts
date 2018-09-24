@@ -1,3 +1,5 @@
+import com.jfrog.bintray.gradle.BintrayExtension
+
 plugins {
     `java-library`
     jacoco
@@ -21,6 +23,34 @@ jacoco {
     toolVersion = "0.8.2"
 }
 
+publishing {
+    publications {
+        val main by creating(MavenPublication::class) {
+            from(components["java"])
+
+            val sourcesJar by tasks
+            val javadocJar by tasks
+
+            artifact(sourcesJar)
+            artifact(javadocJar)
+        }
+    }
+}
+
+bintray {
+    publish = true
+    setPublications("main")
+    pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
+        repo = "maven"
+        name = "${project.group}:${project.name}"
+        setLicenses("LGPL-3.0")
+        vcsUrl = "https://gitlab.com/madhead/appstore-receipts-validator-j"
+        version(delegateClosureOf<BintrayExtension.VersionConfig> {
+            name = project.version.toString()
+        })
+    })
+}
+
 tasks {
     val test by getting(Test::class) {
         useJUnitPlatform()
@@ -30,5 +60,17 @@ tasks {
         reports {
             xml.setEnabled(true)
         }
+    }
+
+    val sourcesJar by creating(Jar::class) {
+        from(sourceSets["main"].allJava)
+        classifier = "sources"
+    }
+
+    val javadocJar by creating(Jar::class) {
+        val javadoc by tasks
+
+        from(javadoc)
+        classifier = "javadoc"
     }
 }
