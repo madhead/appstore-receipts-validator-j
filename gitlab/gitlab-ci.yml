@@ -39,6 +39,14 @@ build@openjdk:10:
   extends: .build
   image: openjdk:10
 
+build@openjdk:11:
+  extends: .build
+  image: openjdk:11
+
+build@openjdk:12:
+  extends: .build
+  image: openjdk:12
+
 unit@openjdk:8:
   extends: .unit
   image: openjdk:8
@@ -49,6 +57,18 @@ unit@openjdk:8:
 unit@openjdk:10:
   extends: .unit
   image: openjdk:10
+  script:
+    - ./gradlew test
+
+unit@openjdk:11:
+  extends: .unit
+  image: openjdk:11
+  script:
+    - ./gradlew test
+
+unit@openjdk:12:
+  extends: .unit
+  image: openjdk:12
   script:
     - ./gradlew test
 
