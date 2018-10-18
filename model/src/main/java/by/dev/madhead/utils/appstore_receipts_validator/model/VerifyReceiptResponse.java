@@ -18,9 +18,8 @@ public class VerifyReceiptResponse {
     @JsonProperty("latest_receipt")
     private String latestReceipt;
 
-    // TODO: DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY
     @JsonProperty("latest_receipt_info")
-    private List<Receipt> latestReceiptInfo;
+    private List<InApp> latestReceiptInfo;
 
     @JsonProperty("latest_expired_receipt_info")
     private Receipt latestExpiredReceiptInfo;
@@ -55,11 +54,11 @@ public class VerifyReceiptResponse {
         this.latestReceipt = latestReceipt;
     }
 
-    public List<Receipt> getLatestReceiptInfo() {
+    public List<InApp> getLatestReceiptInfo() {
         return latestReceiptInfo;
     }
 
-    public void setLatestReceiptInfo(final List<Receipt> latestReceiptInfo) {
+    public void setLatestReceiptInfo(final List<InApp> latestReceiptInfo) {
         this.latestReceiptInfo = latestReceiptInfo;
     }
 
