@@ -10,11 +10,10 @@ dependencies {
     api("com.fasterxml.jackson.core:jackson-databind")
     api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 
-    implementation("com.google.guava:guava")
-
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("org.skyscreamer:jsonassert")
+    testImplementation("nl.jqno.equalsverifier:equalsverifier")
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }

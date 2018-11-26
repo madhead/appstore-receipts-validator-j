@@ -3,12 +3,12 @@ package by.dev.madhead.utils.appstore_receipts_validator.model;
 import by.dev.madhead.utils.appstore_receipts_validator.mapper.VerifyReceiptResponseStatusDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.base.MoreObjects;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.StringJoiner;
 
-public class VerifyReceiptResponse {
+public final class VerifyReceiptResponse {
     @JsonProperty("status")
     private Status status;
 
@@ -113,15 +113,14 @@ public class VerifyReceiptResponse {
 
     @Override
     public String toString() {
-        return MoreObjects
-            .toStringHelper(this)
-            .add("status", status)
-            .add("receipt", receipt)
-            .add("latestReceipt", latestReceipt)
-            .add("latestReceiptInfo", latestReceiptInfo)
-            .add("latestExpiredReceiptInfo", latestExpiredReceiptInfo)
-            .add("pendingRenewalInfo", pendingRenewalInfo)
-            .add("retryable", retryable)
+        return new StringJoiner(", ", VerifyReceiptResponse.class.getSimpleName() + "[", "]")
+            .add("status=" + status)
+            .add("receipt=" + receipt)
+            .add("latestReceipt='" + latestReceipt + "'")
+            .add("latestReceiptInfo=" + latestReceiptInfo)
+            .add("latestExpiredReceiptInfo=" + latestExpiredReceiptInfo)
+            .add("pendingRenewalInfo=" + pendingRenewalInfo)
+            .add("retryable=" + retryable)
             .toString();
     }
 

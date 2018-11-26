@@ -2,12 +2,14 @@ package by.dev.madhead.utils.appstore_receipts_validator.model;
 
 import by.dev.madhead.utils.appstore_receipts_validator.mapper.ObjectMapperFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.io.Resources;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
-import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 class VerifyReceiptRequestTest {
     private ObjectMapper objectMapper;
@@ -26,7 +28,7 @@ class VerifyReceiptRequestTest {
         );
 
         JSONAssert.assertEquals(
-            Resources.toString(getClass().getResource("VerifyReceiptRequestTest/testSerializationAllFields.json"), StandardCharsets.UTF_8),
+            new Scanner(getClass().getResourceAsStream("VerifyReceiptRequestTest/testSerializationAllFields.json")).useDelimiter("\\A").next(),
             objectMapper.writeValueAsString(request),
             true
         );
@@ -39,9 +41,21 @@ class VerifyReceiptRequestTest {
         );
 
         JSONAssert.assertEquals(
-            Resources.toString(getClass().getResource("VerifyReceiptRequestTest/testSerializationSomeFields.json"), StandardCharsets.UTF_8),
+            new Scanner(getClass().getResourceAsStream("VerifyReceiptRequestTest/testSerializationSomeFields.json")).useDelimiter("\\A").next(),
             objectMapper.writeValueAsString(request),
             true
+        );
+    }
+
+    @Test
+    public void testEquals() {
+        EqualsVerifier.forClass(VerifyReceiptRequest.class).suppress(Warning.NONFINAL_FIELDS).verify();
+    }
+
+    @Test
+    public void testToString() throws Exception {
+        Assertions.assertNotNull(
+            objectMapper.readValue(getClass().getResource("VerifyReceiptRequestTest/testToString.json"), VerifyReceiptRequest.class).toString()
         );
     }
 }

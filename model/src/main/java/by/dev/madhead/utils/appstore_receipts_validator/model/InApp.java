@@ -4,12 +4,12 @@ import by.dev.madhead.utils.appstore_receipts_validator.mapper.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.base.MoreObjects;
 
 import java.time.ZonedDateTime;
 import java.util.Objects;
+import java.util.StringJoiner;
 
-public class InApp {
+public final class InApp {
     @JsonProperty("quantity")
     private Integer quantity;
 
@@ -283,27 +283,26 @@ public class InApp {
 
     @Override
     public String toString() {
-        return MoreObjects
-            .toStringHelper(this)
-            .add("quantity", quantity)
-            .add("productId", productId)
-            .add("transactionId", transactionId)
-            .add("originalTransactionId", originalTransactionId)
-            .add("purchaseDate", purchaseDate)
-            .add("originalPurchaseDate", originalPurchaseDate)
-            .add("expiresDate", expiresDate)
-            .add("expirationIntent", expirationIntent)
-            .add("inBillingRetryPeriod", inBillingRetryPeriod)
-            .add("trialPeriod", trialPeriod)
-            .add("inIntroOfferPeriod", inIntroOfferPeriod)
-            .add("cancellationDate", cancellationDate)
-            .add("cancellationReason", cancellationReason)
-            .add("appItemId", appItemId)
-            .add("versionExternalIdentifier", versionExternalIdentifier)
-            .add("webOrderLineItemId", webOrderLineItemId)
-            .add("autoRenewStatus", autoRenewStatus)
-            .add("autoRenewProductId", autoRenewProductId)
-            .add("priceConsentStatus", priceConsentStatus)
+        return new StringJoiner(", ", InApp.class.getSimpleName() + "[", "]")
+            .add("quantity=" + quantity)
+            .add("productId='" + productId + "'")
+            .add("transactionId='" + transactionId + "'")
+            .add("originalTransactionId='" + originalTransactionId + "'")
+            .add("purchaseDate=" + purchaseDate)
+            .add("originalPurchaseDate=" + originalPurchaseDate)
+            .add("expiresDate=" + expiresDate)
+            .add("expirationIntent=" + expirationIntent)
+            .add("inBillingRetryPeriod=" + inBillingRetryPeriod)
+            .add("trialPeriod=" + trialPeriod)
+            .add("inIntroOfferPeriod=" + inIntroOfferPeriod)
+            .add("cancellationDate=" + cancellationDate)
+            .add("cancellationReason=" + cancellationReason)
+            .add("appItemId='" + appItemId + "'")
+            .add("versionExternalIdentifier='" + versionExternalIdentifier + "'")
+            .add("webOrderLineItemId='" + webOrderLineItemId + "'")
+            .add("autoRenewStatus=" + autoRenewStatus)
+            .add("autoRenewProductId='" + autoRenewProductId + "'")
+            .add("priceConsentStatus=" + priceConsentStatus)
             .toString();
     }
 

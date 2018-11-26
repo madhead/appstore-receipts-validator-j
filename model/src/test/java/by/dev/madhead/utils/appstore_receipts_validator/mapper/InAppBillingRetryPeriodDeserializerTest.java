@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.base.MoreObjects;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class InAppBillingRetryPeriodDeserializerTest {
     private ObjectMapper objectMapper;
@@ -98,9 +98,8 @@ public class InAppBillingRetryPeriodDeserializerTest {
 
         @Override
         public String toString() {
-            return MoreObjects
-                .toStringHelper(this)
-                .add("inBillingRetryPeriod", inBillingRetryPeriod)
+            return new StringJoiner(", ", BillingRetryPeriodHolder.class.getSimpleName() + "[", "]")
+                .add("inBillingRetryPeriod=" + inBillingRetryPeriod)
                 .toString();
         }
     }

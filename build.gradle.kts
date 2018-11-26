@@ -23,8 +23,8 @@ subprojects {
             mavenBom("com.fasterxml.jackson:jackson-bom:2.9.7")
         }
         dependencies {
-            dependency("com.google.guava:guava:26.0-jre")
             dependency("org.skyscreamer:jsonassert:1.5.0")
+            dependency("nl.jqno.equalsverifier:equalsverifier:3.0.3")
         }
     }
 
