@@ -2,12 +2,12 @@ package by.dev.madhead.utils.appstore_receipts_validator.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.MoreObjects;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class VerifyReceiptRequest {
+public final class VerifyReceiptRequest {
     @JsonProperty("receipt-data")
     private String receiptData;
 
@@ -78,11 +78,10 @@ public class VerifyReceiptRequest {
 
     @Override
     public String toString() {
-        return MoreObjects
-            .toStringHelper(this)
-            .add("receipt-data", receiptData)
-            .add("password", password)
-            .add("exclude-old-transactions", excludeOldTransactions)
+        return new StringJoiner(", ", VerifyReceiptRequest.class.getSimpleName() + "[", "]")
+            .add("receiptData='" + receiptData + "'")
+            .add("password='" + password + "'")
+            .add("excludeOldTransactions=" + excludeOldTransactions)
             .toString();
     }
 }

@@ -4,7 +4,6 @@ import by.dev.madhead.utils.appstore_receipts_validator.model.InApp;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.base.MoreObjects;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class InAppAutoRenewStatusDeserializerTest {
     private ObjectMapper objectMapper;
@@ -97,9 +97,8 @@ public class InAppAutoRenewStatusDeserializerTest {
 
         @Override
         public String toString() {
-            return MoreObjects
-                .toStringHelper(this)
-                .add("autoRenewStatus", autoRenewStatus)
+            return new StringJoiner(", ", AutoRenewStatusHolder.class.getSimpleName() + "[", "]")
+                .add("autoRenewStatus=" + autoRenewStatus)
                 .toString();
         }
     }

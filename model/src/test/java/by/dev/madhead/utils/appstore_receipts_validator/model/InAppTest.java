@@ -2,6 +2,8 @@ package by.dev.madhead.utils.appstore_receipts_validator.model;
 
 import by.dev.madhead.utils.appstore_receipts_validator.mapper.ObjectMapperFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +19,6 @@ public class InAppTest {
     private void bedoreEach() {
         this.objectMapper = ObjectMapperFactory.defaultObjectMapper();
     }
-
 
     @Test
     public void testDeserialization() throws Exception {
@@ -54,5 +55,15 @@ public class InAppTest {
         Assertions.assertEquals(InApp.AutoRenewStatus.ON, value.getAutoRenewStatus());
         Assertions.assertEquals("auto_renew_product_id", value.getAutoRenewProductId());
         Assertions.assertEquals(InApp.PriceConsentStatus.AGREED, value.getPriceConsentStatus());
+    }
+
+    @Test
+    public void testEquals() {
+        EqualsVerifier.forClass(InApp.class).suppress(Warning.NONFINAL_FIELDS).verify();
+    }
+
+    @Test
+    public void testToString() throws Exception {
+        Assertions.assertNotNull(objectMapper.readValue(getClass().getResource("InAppTest/testToString.json"), InApp.class).toString());
     }
 }

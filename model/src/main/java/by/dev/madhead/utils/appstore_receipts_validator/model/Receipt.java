@@ -2,13 +2,13 @@ package by.dev.madhead.utils.appstore_receipts_validator.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.MoreObjects;
 
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.StringJoiner;
 
-public class Receipt {
+public final class Receipt {
     @JsonProperty("bundle_id")
     private String bundleId;
 
@@ -103,14 +103,13 @@ public class Receipt {
 
     @Override
     public String toString() {
-        return MoreObjects
-            .toStringHelper(this)
-            .add("bundleId", bundleId)
-            .add("applicationVersion", applicationVersion)
-            .add("inApp", inApp)
-            .add("originalApplicationVersion", originalApplicationVersion)
-            .add("receiptCreationDate", receiptCreationDate)
-            .add("expirationDate", expirationDate)
+        return new StringJoiner(", ", Receipt.class.getSimpleName() + "[", "]")
+            .add("bundleId='" + bundleId + "'")
+            .add("applicationVersion='" + applicationVersion + "'")
+            .add("inApp=" + inApp)
+            .add("originalApplicationVersion='" + originalApplicationVersion + "'")
+            .add("receiptCreationDate=" + receiptCreationDate)
+            .add("expirationDate=" + expirationDate)
             .toString();
     }
 }
