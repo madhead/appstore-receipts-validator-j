@@ -22,20 +22,6 @@ jacoco {
     toolVersion = "0.8.2"
 }
 
-publishing {
-    publications {
-        val main by creating(MavenPublication::class) {
-            from(components["java"])
-
-            val sourcesJar by tasks
-            val javadocJar by tasks
-
-            artifact(sourcesJar)
-            artifact(javadocJar)
-        }
-    }
-}
-
 bintray {
     publish = true
     setPublications("main")
@@ -71,5 +57,19 @@ tasks {
 
         from(javadoc)
         classifier = "javadoc"
+    }
+}
+
+publishing {
+    publications {
+        val main by creating(MavenPublication::class) {
+            from(components["java"])
+
+            val sourcesJar by tasks
+            val javadocJar by tasks
+
+            artifact(sourcesJar)
+            artifact(javadocJar)
+        }
     }
 }
