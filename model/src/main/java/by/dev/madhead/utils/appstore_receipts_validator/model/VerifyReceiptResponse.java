@@ -1,5 +1,6 @@
 package by.dev.madhead.utils.appstore_receipts_validator.model;
 
+import by.dev.madhead.utils.appstore_receipts_validator.mapper.VerifyReceiptResponseEnvironmentDeserializer;
 import by.dev.madhead.utils.appstore_receipts_validator.mapper.VerifyReceiptResponseStatusDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -9,6 +10,10 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 public final class VerifyReceiptResponse {
+
+    @JsonProperty("environment")
+    private Environment environment;
+
     @JsonProperty("status")
     private Status status;
 
@@ -36,6 +41,14 @@ public final class VerifyReceiptResponse {
 
     public void setStatus(final Status status) {
         this.status = status;
+    }
+
+    public Environment getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 
     public Receipt getReceipt() {
@@ -87,33 +100,29 @@ public final class VerifyReceiptResponse {
     }
 
     @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        final VerifyReceiptResponse that = (VerifyReceiptResponse) o;
-
-        return status == that.status &&
-               Objects.equals(receipt, that.receipt) &&
-               Objects.equals(latestReceipt, that.latestReceipt) &&
-               Objects.equals(latestReceiptInfo, that.latestReceiptInfo) &&
-               Objects.equals(latestExpiredReceiptInfo, that.latestExpiredReceiptInfo) &&
-               Objects.equals(pendingRenewalInfo, that.pendingRenewalInfo) &&
-               Objects.equals(retryable, that.retryable);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VerifyReceiptResponse that = (VerifyReceiptResponse) o;
+        return environment == that.environment &&
+            status == that.status &&
+            Objects.equals(receipt, that.receipt) &&
+            Objects.equals(latestReceipt, that.latestReceipt) &&
+            Objects.equals(latestReceiptInfo, that.latestReceiptInfo) &&
+            Objects.equals(latestExpiredReceiptInfo, that.latestExpiredReceiptInfo) &&
+            Objects.equals(pendingRenewalInfo, that.pendingRenewalInfo) &&
+            Objects.equals(retryable, that.retryable);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(status, receipt, latestReceipt, latestReceiptInfo, latestExpiredReceiptInfo, pendingRenewalInfo, retryable);
+        return Objects.hash(environment, status, receipt, latestReceipt, latestReceiptInfo, latestExpiredReceiptInfo, pendingRenewalInfo, retryable);
     }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", VerifyReceiptResponse.class.getSimpleName() + "[", "]")
+            .add("environment=" + environment)
             .add("status=" + status)
             .add("receipt=" + receipt)
             .add("latestReceipt='" + latestReceipt + "'")
@@ -136,5 +145,11 @@ public final class VerifyReceiptResponse {
         WRONG_ENVIRONMENT,          // 21007, 21008
         AUTHORIZATION_ERROR,        // 21010
         INTERNAL_ERROR              // 21100-21199
+    }
+
+    @JsonDeserialize(using = VerifyReceiptResponseEnvironmentDeserializer.class)
+    public enum Environment {
+        SANDBOX,
+        PRODUCTION
     }
 }

@@ -16,7 +16,7 @@ public class InAppTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    private void bedoreEach() {
+    private void beforeEach() {
         this.objectMapper = ObjectMapperFactory.defaultObjectMapper();
     }
 
@@ -32,29 +32,44 @@ public class InAppTest {
             ZonedDateTime.of(LocalDateTime.of(2018, 9, 23, 3, 42, 42), ZoneId.of("Etc/GMT")).toInstant(),
             value.getPurchaseDate().toInstant()
         );
+        Assertions.assertEquals(Long.valueOf(1563269415000L), value.getPurchaseDateMs());
+        Assertions.assertEquals(
+            ZonedDateTime.of(LocalDateTime.of(2019, 7, 16, 2, 30, 15), ZoneId.of("America/Los_Angeles")).toInstant(),
+            value.getPurchaseDatePst().toInstant()
+        );
         Assertions.assertEquals(
             ZonedDateTime.of(LocalDateTime.of(2017, 9, 23, 3, 42, 42), ZoneId.of("Etc/GMT")).toInstant(),
             value.getOriginalPurchaseDate().toInstant()
+        );
+        Assertions.assertEquals(Long.valueOf(1563269416000L), value.getOriginalPurchaseDateMs());
+        Assertions.assertEquals(
+            ZonedDateTime.of(LocalDateTime.of(2019, 7, 16, 2, 30, 16), ZoneId.of("America/Los_Angeles")).toInstant(),
+            value.getOriginalPurchaseDatePst().toInstant()
         );
         Assertions.assertEquals(
             ZonedDateTime.of(LocalDateTime.of(2019, 9, 23, 3, 42, 42), ZoneId.of("Etc/GMT")).toInstant(),
             value.getExpiresDate().toInstant()
         );
-        Assertions.assertEquals(InApp.ExpirationIntent.CUSTOMER_CANCELED, value.getExpirationIntent());
-        Assertions.assertEquals(Boolean.TRUE, value.getInBillingRetryPeriod());
+        Assertions.assertEquals(Long.valueOf(1563528615000L), value.getExpiresDateMs());
+        Assertions.assertEquals(
+            ZonedDateTime.of(LocalDateTime.of(2019, 7, 19, 2, 30, 15), ZoneId.of("America/Los_Angeles")).toInstant(),
+            value.getExpiresDatePst().toInstant()
+        );
         Assertions.assertEquals(true, value.getTrialPeriod());
         Assertions.assertEquals(false, value.getInIntroOfferPeriod());
         Assertions.assertEquals(
             ZonedDateTime.of(LocalDateTime.of(2018, 9, 22, 3, 42, 42), ZoneId.of("Etc/GMT")).toInstant(),
             value.getCancellationDate().toInstant()
         );
+        Assertions.assertEquals(Long.valueOf(1563528615000L), value.getCancellationDateMs());
+        Assertions.assertEquals(
+            ZonedDateTime.of(LocalDateTime.of(2019, 7, 19, 2, 30, 15), ZoneId.of("America/Los_Angeles")).toInstant(),
+            value.getCancellationDatePst().toInstant()
+        );
         Assertions.assertEquals(InApp.CancellationReason.ANOTHER_REASON, value.getCancellationReason());
-        Assertions.assertEquals("app_item_id", value.getAppItemId());
-        Assertions.assertEquals("42.42", value.getVersionExternalIdentifier());
         Assertions.assertEquals("web_order_line_item_id", value.getWebOrderLineItemId());
-        Assertions.assertEquals(InApp.AutoRenewStatus.ON, value.getAutoRenewStatus());
-        Assertions.assertEquals("auto_renew_product_id", value.getAutoRenewProductId());
-        Assertions.assertEquals(InApp.PriceConsentStatus.AGREED, value.getPriceConsentStatus());
+        Assertions.assertEquals("promotional_offer_id", value.getPromotionalOfferId());
+        Assertions.assertTrue(value.getUpgraded());
     }
 
     @Test

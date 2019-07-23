@@ -4,6 +4,16 @@
     "in_app": [],
     "original_application_version": "41.41",
     "receipt_creation_date": "2018-09-23 03:42:42 Etc/GMT",
+    "receipt_creation_date_ms": "1563494400000",
+    "receipt_creation_date_pst": "2019-07-18 17:00:00 America/Los_Angeles",
+    "request_date": "2019-07-23 09:00:00 Etc/GMT",
+    "request_date_ms": "1563875196800",
+    "request_date_pst": "2019-07-23 02:00:00 America/Los_Angeles",
     "expiration_date": "2019-09-23 03:42:42 Etc/GMT",
-    "unknown_field": "unknown_value"
+    "original_purchase_date": "2019-07-16 09:27:00 Etc/GMT",
+    "original_purchase_date_ms": "1563269200000",
+    "original_purchase_date_pst": "2019-07-16 02:27:00 America/Los_Angeles",
+    "unknown_field": "unknown_value",
+    "download_id": 32051403290714,
+    "version_external_identifier": 141916214
 }

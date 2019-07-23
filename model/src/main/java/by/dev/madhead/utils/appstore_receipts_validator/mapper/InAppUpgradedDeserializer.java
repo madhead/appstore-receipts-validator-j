@@ -1,6 +1,7 @@
 package by.dev.madhead.utils.appstore_receipts_validator.mapper;
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdScalarDeserializer;
@@ -8,23 +9,22 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 import java.io.IOException;
 
-public class InAppBillingRetryPeriodDeserializer extends StdScalarDeserializer<Boolean> {
-    protected InAppBillingRetryPeriodDeserializer() {
+public class InAppUpgradedDeserializer extends StdScalarDeserializer<Boolean> {
+
+    public InAppUpgradedDeserializer() {
         super(Boolean.class);
     }
 
     @Override
-    public Boolean deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public Boolean deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         if (p.currentToken() != JsonToken.VALUE_STRING) {
-            throw new InvalidFormatException(p, "Invalid Billing Retry Period", null, Boolean.class);
+            throw new InvalidFormatException(p, "Invalid In App Upgraded", null, Boolean.class);
         } else {
             switch (p.getValueAsString()) {
-                case "0":
-                    return Boolean.FALSE;
-                case "1":
+                case "true":
                     return Boolean.TRUE;
                 default:
-                    throw new InvalidFormatException(p, "Unknown Billing Retry Period", null, Boolean.class);
+                    return Boolean.FALSE;
             }
         }
     }

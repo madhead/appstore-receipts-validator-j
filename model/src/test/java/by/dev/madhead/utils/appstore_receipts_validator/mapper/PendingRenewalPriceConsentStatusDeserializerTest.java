@@ -1,6 +1,6 @@
 package by.dev.madhead.utils.appstore_receipts_validator.mapper;
 
-import by.dev.madhead.utils.appstore_receipts_validator.model.InApp;
+import by.dev.madhead.utils.appstore_receipts_validator.model.PendingRenewal;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,23 +13,23 @@ import org.junit.jupiter.params.provider.EnumSource;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class InAppPriceConsentStatusDeserializerTest {
+public class PendingRenewalPriceConsentStatusDeserializerTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    private void bedoreEach() {
+    private void beforeEach() {
         this.objectMapper = ObjectMapperFactory.defaultObjectMapper();
     }
 
     @ParameterizedTest
-    @EnumSource(InApp.PriceConsentStatus.class)
-    public void testDeserialization(final InApp.PriceConsentStatus value) throws Exception {
+    @EnumSource(PendingRenewal.PriceConsentStatus.class)
+    public void testDeserialization(final PendingRenewal.PriceConsentStatus value) throws Exception {
         Assertions.assertEquals(
             new PriceConsentStatusHolder(
                 value
             ),
             objectMapper.readValue(
-                getClass().getResource("InAppPriceConsentStatusDeserializerTest/testDeserialization_" + value.name() + ".json"),
+                getClass().getResource("PendingRenewalPriceConsentStatusDeserializerTest/testDeserialization_" + value.name() + ".json"),
                 PriceConsentStatusHolder.class
             )
         );
@@ -40,7 +40,7 @@ public class InAppPriceConsentStatusDeserializerTest {
         Assertions.assertThrows(
             JsonMappingException.class,
             () -> objectMapper.readValue(
-                getClass().getResource("InAppPriceConsentStatusDeserializerTest/testDeserializationUnknownValue.json"),
+                getClass().getResource("PendingRenewalPriceConsentStatusDeserializerTest/testDeserializationUnknownValue.json"),
                 PriceConsentStatusHolder.class
             )
         );
@@ -51,7 +51,7 @@ public class InAppPriceConsentStatusDeserializerTest {
         Assertions.assertThrows(
             JsonMappingException.class,
             () -> objectMapper.readValue(
-                getClass().getResource("InAppPriceConsentStatusDeserializerTest/testDeserializationInvalidValue.json"),
+                getClass().getResource("PendingRenewalPriceConsentStatusDeserializerTest/testDeserializationInvalidValue.json"),
                 PriceConsentStatusHolder.class
             )
         );
@@ -59,20 +59,20 @@ public class InAppPriceConsentStatusDeserializerTest {
 
     private static class PriceConsentStatusHolder {
         @JsonProperty("price_consent_status")
-        private InApp.PriceConsentStatus priceConsentStatus;
+        private PendingRenewal.PriceConsentStatus priceConsentStatus;
 
         public PriceConsentStatusHolder() {
         }
 
-        public PriceConsentStatusHolder(final InApp.PriceConsentStatus priceConsentStatus) {
+        public PriceConsentStatusHolder(final PendingRenewal.PriceConsentStatus priceConsentStatus) {
             this.priceConsentStatus = priceConsentStatus;
         }
 
-        public InApp.PriceConsentStatus getPriceConsentStatus() {
+        public PendingRenewal.PriceConsentStatus getPriceConsentStatus() {
             return priceConsentStatus;
         }
 
-        public void setPriceConsentStatus(final InApp.PriceConsentStatus priceConsentStatus) {
+        public void setPriceConsentStatus(final PendingRenewal.PriceConsentStatus priceConsentStatus) {
             this.priceConsentStatus = priceConsentStatus;
         }
 

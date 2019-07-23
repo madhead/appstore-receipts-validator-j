@@ -1,6 +1,6 @@
 package by.dev.madhead.utils.appstore_receipts_validator.mapper;
 
-import by.dev.madhead.utils.appstore_receipts_validator.model.InApp;
+import by.dev.madhead.utils.appstore_receipts_validator.model.PendingRenewal;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,23 +13,23 @@ import org.junit.jupiter.params.provider.EnumSource;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class InAppAutoRenewStatusDeserializerTest {
+public class PendingRenewalAutoRenewStatusDeserializerTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    private void bedoreEach() {
+    private void beforeEach() {
         this.objectMapper = ObjectMapperFactory.defaultObjectMapper();
     }
 
     @ParameterizedTest
-    @EnumSource(InApp.AutoRenewStatus.class)
-    public void testDeserialization(final InApp.AutoRenewStatus value) throws Exception {
+    @EnumSource(PendingRenewal.AutoRenewStatus.class)
+    public void testDeserialization(final PendingRenewal.AutoRenewStatus value) throws Exception {
         Assertions.assertEquals(
             new AutoRenewStatusHolder(
                 value
             ),
             objectMapper.readValue(
-                getClass().getResource("InAppAutoRenewStatusDeserializerTest/testDeserialization_" + value.name() + ".json"),
+                getClass().getResource("PendingRenewalAutoRenewStatusDeserializerTest/testDeserialization_" + value.name() + ".json"),
                 AutoRenewStatusHolder.class
             )
         );
@@ -40,7 +40,7 @@ public class InAppAutoRenewStatusDeserializerTest {
         Assertions.assertThrows(
             JsonMappingException.class,
             () -> objectMapper.readValue(
-                getClass().getResource("InAppAutoRenewStatusDeserializerTest/testDeserializationUnknownValue.json"),
+                getClass().getResource("PendingRenewalAutoRenewStatusDeserializerTest/testDeserializationUnknownValue.json"),
                 AutoRenewStatusHolder.class
             )
         );
@@ -51,7 +51,7 @@ public class InAppAutoRenewStatusDeserializerTest {
         Assertions.assertThrows(
             JsonMappingException.class,
             () -> objectMapper.readValue(
-                getClass().getResource("InAppAutoRenewStatusDeserializerTest/testDeserializationInvalidValue.json"),
+                getClass().getResource("PendingRenewalAutoRenewStatusDeserializerTest/testDeserializationInvalidValue.json"),
                 AutoRenewStatusHolder.class
             )
         );
@@ -59,20 +59,20 @@ public class InAppAutoRenewStatusDeserializerTest {
 
     private static class AutoRenewStatusHolder {
         @JsonProperty("auto_renew_status")
-        private InApp.AutoRenewStatus autoRenewStatus;
+        private PendingRenewal.AutoRenewStatus autoRenewStatus;
 
         public AutoRenewStatusHolder() {
         }
 
-        public AutoRenewStatusHolder(final InApp.AutoRenewStatus autoRenewStatus) {
+        public AutoRenewStatusHolder(final PendingRenewal.AutoRenewStatus autoRenewStatus) {
             this.autoRenewStatus = autoRenewStatus;
         }
 
-        public InApp.AutoRenewStatus getAutoRenewStatus() {
+        public PendingRenewal.AutoRenewStatus getAutoRenewStatus() {
             return autoRenewStatus;
         }
 
-        public void setAutoRenewStatus(final InApp.AutoRenewStatus autoRenewStatus) {
+        public void setAutoRenewStatus(final PendingRenewal.AutoRenewStatus autoRenewStatus) {
             this.autoRenewStatus = autoRenewStatus;
         }
 

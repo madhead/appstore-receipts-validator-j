@@ -17,7 +17,7 @@ public class InAppCancellationReasonDeserializerTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    private void bedoreEach() {
+    private void beforeEach() {
         this.objectMapper = ObjectMapperFactory.defaultObjectMapper();
     }
 

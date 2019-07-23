@@ -16,6 +16,9 @@ public final class InApp {
     @JsonProperty("product_id")
     private String productId;
 
+    @JsonProperty("promotional_offer_id")
+    private String promotionalOfferId;
+
     @JsonProperty("transaction_id")
     private String transactionId;
 
@@ -26,23 +29,41 @@ public final class InApp {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
     private ZonedDateTime purchaseDate;
 
+    @JsonProperty("purchase_date_ms")
+    private Long purchaseDateMs;
+
+    @JsonProperty("purchase_date_pst")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
+    private ZonedDateTime purchaseDatePst;
+
     @JsonProperty("original_purchase_date")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
     private ZonedDateTime originalPurchaseDate;
+
+    @JsonProperty("original_purchase_date_ms")
+    private Long originalPurchaseDateMs;
+
+    @JsonProperty("original_purchase_date_pst")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
+    private ZonedDateTime originalPurchaseDatePst;
 
     @JsonProperty("expires_date")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
     private ZonedDateTime expiresDate;
 
-    @JsonProperty("expiration_intent")
-    private ExpirationIntent expirationIntent;
+    @JsonProperty("expires_date_ms")
+    private Long expiresDateMs;
 
-    @JsonProperty("is_in_billing_retry_period")
-    @JsonDeserialize(using = InAppBillingRetryPeriodDeserializer.class)
-    private Boolean inBillingRetryPeriod;
+    @JsonProperty("expires_date_pst")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
+    private ZonedDateTime expiresDatePst;
 
     @JsonProperty("is_trial_period")
     private Boolean trialPeriod;
+
+    @JsonDeserialize(using = InAppUpgradedDeserializer.class)
+    @JsonProperty("is_upgraded")
+    private Boolean upgraded;
 
     @JsonProperty("is_in_intro_offer_period")
     private Boolean inIntroOfferPeriod;
@@ -51,32 +72,24 @@ public final class InApp {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
     private ZonedDateTime cancellationDate;
 
+    @JsonProperty("cancellation_date_ms")
+    private Long cancellationDateMs;
+
+    @JsonProperty("cancellation_date_pst")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
+    private ZonedDateTime cancellationDatePst;
+
     @JsonProperty("cancellation_reason")
     private CancellationReason cancellationReason;
 
-    @JsonProperty("app_item_id")
-    private String appItemId;
-
-    @JsonProperty("version_external_identifier")
-    private String versionExternalIdentifier;
-
     @JsonProperty("web_order_line_item_id")
     private String webOrderLineItemId;
-
-    @JsonProperty("auto_renew_status")
-    private AutoRenewStatus autoRenewStatus;
-
-    @JsonProperty("auto_renew_product_id")
-    private String autoRenewProductId;
-
-    @JsonProperty("price_consent_status")
-    private PriceConsentStatus priceConsentStatus;
 
     public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(final Integer quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
@@ -84,15 +97,23 @@ public final class InApp {
         return productId;
     }
 
-    public void setProductId(final String productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
+    }
+
+    public String getPromotionalOfferId() {
+        return promotionalOfferId;
+    }
+
+    public void setPromotionalOfferId(String promotionalOfferId) {
+        this.promotionalOfferId = promotionalOfferId;
     }
 
     public String getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(final String transactionId) {
+    public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
     }
 
@@ -100,7 +121,7 @@ public final class InApp {
         return originalTransactionId;
     }
 
-    public void setOriginalTransactionId(final String originalTransactionId) {
+    public void setOriginalTransactionId(String originalTransactionId) {
         this.originalTransactionId = originalTransactionId;
     }
 
@@ -108,55 +129,95 @@ public final class InApp {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(final ZonedDateTime purchaseDate) {
+    public void setPurchaseDate(ZonedDateTime purchaseDate) {
         this.purchaseDate = purchaseDate;
+    }
+
+    public Long getPurchaseDateMs() {
+        return purchaseDateMs;
+    }
+
+    public void setPurchaseDateMs(Long purchaseDateMs) {
+        this.purchaseDateMs = purchaseDateMs;
+    }
+
+    public ZonedDateTime getPurchaseDatePst() {
+        return purchaseDatePst;
+    }
+
+    public void setPurchaseDatePst(ZonedDateTime purchaseDatePst) {
+        this.purchaseDatePst = purchaseDatePst;
     }
 
     public ZonedDateTime getOriginalPurchaseDate() {
         return originalPurchaseDate;
     }
 
-    public void setOriginalPurchaseDate(final ZonedDateTime originalPurchaseDate) {
+    public void setOriginalPurchaseDate(ZonedDateTime originalPurchaseDate) {
         this.originalPurchaseDate = originalPurchaseDate;
+    }
+
+    public Long getOriginalPurchaseDateMs() {
+        return originalPurchaseDateMs;
+    }
+
+    public void setOriginalPurchaseDateMs(Long originalPurchaseDateMs) {
+        this.originalPurchaseDateMs = originalPurchaseDateMs;
+    }
+
+    public ZonedDateTime getOriginalPurchaseDatePst() {
+        return originalPurchaseDatePst;
+    }
+
+    public void setOriginalPurchaseDatePst(ZonedDateTime originalPurchaseDatePst) {
+        this.originalPurchaseDatePst = originalPurchaseDatePst;
     }
 
     public ZonedDateTime getExpiresDate() {
         return expiresDate;
     }
 
-    public void setExpiresDate(final ZonedDateTime expiresDate) {
+    public void setExpiresDate(ZonedDateTime expiresDate) {
         this.expiresDate = expiresDate;
     }
 
-    public ExpirationIntent getExpirationIntent() {
-        return expirationIntent;
+    public Long getExpiresDateMs() {
+        return expiresDateMs;
     }
 
-    public void setExpirationIntent(final ExpirationIntent expirationIntent) {
-        this.expirationIntent = expirationIntent;
+    public void setExpiresDateMs(Long expiresDateMs) {
+        this.expiresDateMs = expiresDateMs;
     }
 
-    public Boolean getInBillingRetryPeriod() {
-        return inBillingRetryPeriod;
+    public ZonedDateTime getExpiresDatePst() {
+        return expiresDatePst;
     }
 
-    public void setInBillingRetryPeriod(final Boolean inBillingRetryPeriod) {
-        this.inBillingRetryPeriod = inBillingRetryPeriod;
+    public void setExpiresDatePst(ZonedDateTime expiresDatePst) {
+        this.expiresDatePst = expiresDatePst;
     }
 
     public Boolean getTrialPeriod() {
         return trialPeriod;
     }
 
-    public void setTrialPeriod(final Boolean trialPeriod) {
+    public void setTrialPeriod(Boolean trialPeriod) {
         this.trialPeriod = trialPeriod;
+    }
+
+    public Boolean getUpgraded() {
+        return upgraded;
+    }
+
+    public void setUpgraded(Boolean upgraded) {
+        this.upgraded = upgraded;
     }
 
     public Boolean getInIntroOfferPeriod() {
         return inIntroOfferPeriod;
     }
 
-    public void setInIntroOfferPeriod(final Boolean inIntroOfferPeriod) {
+    public void setInIntroOfferPeriod(Boolean inIntroOfferPeriod) {
         this.inIntroOfferPeriod = inIntroOfferPeriod;
     }
 
@@ -164,121 +225,74 @@ public final class InApp {
         return cancellationDate;
     }
 
-    public void setCancellationDate(final ZonedDateTime cancellationDate) {
+    public void setCancellationDate(ZonedDateTime cancellationDate) {
         this.cancellationDate = cancellationDate;
+    }
+
+    public Long getCancellationDateMs() {
+        return cancellationDateMs;
+    }
+
+    public void setCancellationDateMs(Long cancellationDateMs) {
+        this.cancellationDateMs = cancellationDateMs;
+    }
+
+    public ZonedDateTime getCancellationDatePst() {
+        return cancellationDatePst;
+    }
+
+    public void setCancellationDatePst(ZonedDateTime cancellationDatePst) {
+        this.cancellationDatePst = cancellationDatePst;
     }
 
     public CancellationReason getCancellationReason() {
         return cancellationReason;
     }
 
-    public void setCancellationReason(final CancellationReason cancellationReason) {
+    public void setCancellationReason(CancellationReason cancellationReason) {
         this.cancellationReason = cancellationReason;
-    }
-
-    public String getAppItemId() {
-        return appItemId;
-    }
-
-    public void setAppItemId(final String appItemId) {
-        this.appItemId = appItemId;
-    }
-
-    public String getVersionExternalIdentifier() {
-        return versionExternalIdentifier;
-    }
-
-    public void setVersionExternalIdentifier(final String versionExternalIdentifier) {
-        this.versionExternalIdentifier = versionExternalIdentifier;
     }
 
     public String getWebOrderLineItemId() {
         return webOrderLineItemId;
     }
 
-    public void setWebOrderLineItemId(final String webOrderLineItemId) {
+    public void setWebOrderLineItemId(String webOrderLineItemId) {
         this.webOrderLineItemId = webOrderLineItemId;
-    }
-
-    public AutoRenewStatus getAutoRenewStatus() {
-        return autoRenewStatus;
-    }
-
-    public void setAutoRenewStatus(final AutoRenewStatus autoRenewStatus) {
-        this.autoRenewStatus = autoRenewStatus;
-    }
-
-    public String getAutoRenewProductId() {
-        return autoRenewProductId;
-    }
-
-    public void setAutoRenewProductId(final String autoRenewProductId) {
-        this.autoRenewProductId = autoRenewProductId;
-    }
-
-    public PriceConsentStatus getPriceConsentStatus() {
-        return priceConsentStatus;
-    }
-
-    public void setPriceConsentStatus(final PriceConsentStatus priceConsentStatus) {
-        this.priceConsentStatus = priceConsentStatus;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        final InApp inApp = (InApp) o;
-
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InApp inApp = (InApp) o;
         return Objects.equals(quantity, inApp.quantity) &&
-               Objects.equals(productId, inApp.productId) &&
-               Objects.equals(transactionId, inApp.transactionId) &&
-               Objects.equals(originalTransactionId, inApp.originalTransactionId) &&
-               Objects.equals(purchaseDate, inApp.purchaseDate) &&
-               Objects.equals(originalPurchaseDate, inApp.originalPurchaseDate) &&
-               Objects.equals(expiresDate, inApp.expiresDate) &&
-               expirationIntent == inApp.expirationIntent &&
-               Objects.equals(inBillingRetryPeriod, inApp.inBillingRetryPeriod) &&
-               Objects.equals(trialPeriod, inApp.trialPeriod) &&
-               Objects.equals(inIntroOfferPeriod, inApp.inIntroOfferPeriod) &&
-               Objects.equals(cancellationDate, inApp.cancellationDate) &&
-               cancellationReason == inApp.cancellationReason &&
-               Objects.equals(appItemId, inApp.appItemId) &&
-               Objects.equals(versionExternalIdentifier, inApp.versionExternalIdentifier) &&
-               Objects.equals(webOrderLineItemId, inApp.webOrderLineItemId) &&
-               autoRenewStatus == inApp.autoRenewStatus &&
-               Objects.equals(autoRenewProductId, inApp.autoRenewProductId) &&
-               priceConsentStatus == inApp.priceConsentStatus;
+            Objects.equals(productId, inApp.productId) &&
+            Objects.equals(promotionalOfferId, inApp.promotionalOfferId) &&
+            Objects.equals(transactionId, inApp.transactionId) &&
+            Objects.equals(originalTransactionId, inApp.originalTransactionId) &&
+            Objects.equals(purchaseDate, inApp.purchaseDate) &&
+            Objects.equals(purchaseDateMs, inApp.purchaseDateMs) &&
+            Objects.equals(purchaseDatePst, inApp.purchaseDatePst) &&
+            Objects.equals(originalPurchaseDate, inApp.originalPurchaseDate) &&
+            Objects.equals(originalPurchaseDateMs, inApp.originalPurchaseDateMs) &&
+            Objects.equals(originalPurchaseDatePst, inApp.originalPurchaseDatePst) &&
+            Objects.equals(expiresDate, inApp.expiresDate) &&
+            Objects.equals(expiresDateMs, inApp.expiresDateMs) &&
+            Objects.equals(expiresDatePst, inApp.expiresDatePst) &&
+            Objects.equals(trialPeriod, inApp.trialPeriod) &&
+            Objects.equals(upgraded, inApp.upgraded) &&
+            Objects.equals(inIntroOfferPeriod, inApp.inIntroOfferPeriod) &&
+            Objects.equals(cancellationDate, inApp.cancellationDate) &&
+            Objects.equals(cancellationDateMs, inApp.cancellationDateMs) &&
+            Objects.equals(cancellationDatePst, inApp.cancellationDatePst) &&
+            cancellationReason == inApp.cancellationReason &&
+            Objects.equals(webOrderLineItemId, inApp.webOrderLineItemId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-            quantity,
-            productId,
-            transactionId,
-            originalTransactionId,
-            purchaseDate,
-            originalPurchaseDate,
-            expiresDate,
-            expirationIntent,
-            inBillingRetryPeriod,
-            trialPeriod,
-            inIntroOfferPeriod,
-            cancellationDate,
-            cancellationReason,
-            appItemId,
-            versionExternalIdentifier,
-            webOrderLineItemId,
-            autoRenewStatus,
-            autoRenewProductId,
-            priceConsentStatus
-        );
+        return Objects.hash(quantity, productId, promotionalOfferId, transactionId, originalTransactionId, purchaseDate, purchaseDateMs, purchaseDatePst, originalPurchaseDate, originalPurchaseDateMs, originalPurchaseDatePst, expiresDate, expiresDateMs, expiresDatePst, trialPeriod, upgraded, inIntroOfferPeriod, cancellationDate, cancellationDateMs, cancellationDatePst, cancellationReason, webOrderLineItemId);
     }
 
     @Override
@@ -286,33 +300,27 @@ public final class InApp {
         return new StringJoiner(", ", InApp.class.getSimpleName() + "[", "]")
             .add("quantity=" + quantity)
             .add("productId='" + productId + "'")
+            .add("promotionalOfferId='" + promotionalOfferId + "'")
             .add("transactionId='" + transactionId + "'")
             .add("originalTransactionId='" + originalTransactionId + "'")
             .add("purchaseDate=" + purchaseDate)
+            .add("purchaseDateMs=" + purchaseDateMs)
+            .add("purchaseDatePst=" + purchaseDatePst)
             .add("originalPurchaseDate=" + originalPurchaseDate)
+            .add("originalPurchaseDateMs=" + originalPurchaseDateMs)
+            .add("originalPurchaseDatePst=" + originalPurchaseDatePst)
             .add("expiresDate=" + expiresDate)
-            .add("expirationIntent=" + expirationIntent)
-            .add("inBillingRetryPeriod=" + inBillingRetryPeriod)
+            .add("expiresDateMs=" + expiresDateMs)
+            .add("expiresDatePst=" + expiresDatePst)
             .add("trialPeriod=" + trialPeriod)
+            .add("upgraded=" + upgraded)
             .add("inIntroOfferPeriod=" + inIntroOfferPeriod)
             .add("cancellationDate=" + cancellationDate)
+            .add("cancellationDateMs=" + cancellationDateMs)
+            .add("cancellationDatePst=" + cancellationDatePst)
             .add("cancellationReason=" + cancellationReason)
-            .add("appItemId='" + appItemId + "'")
-            .add("versionExternalIdentifier='" + versionExternalIdentifier + "'")
             .add("webOrderLineItemId='" + webOrderLineItemId + "'")
-            .add("autoRenewStatus=" + autoRenewStatus)
-            .add("autoRenewProductId='" + autoRenewProductId + "'")
-            .add("priceConsentStatus=" + priceConsentStatus)
             .toString();
-    }
-
-    @JsonDeserialize(using = InAppExpirationIntentDeserializer.class)
-    public enum ExpirationIntent {
-        CUSTOMER_CANCELED,       // 1
-        BILLING_ERROR,           // 2
-        CUSTOMER_DECLINED_PRICE, // 3
-        PRODUCT_NOT_AVAILABLE,   // 4
-        UNKNOWN_ERROR            // 5
     }
 
     @JsonDeserialize(using = InAppCancellationReasonDeserializer.class)
@@ -321,15 +329,4 @@ public final class InApp {
         ANOTHER_REASON  // 0
     }
 
-    @JsonDeserialize(using = InAppAutoRenewStatusDeserializer.class)
-    public enum AutoRenewStatus {
-        ON, // 1
-        OFF // 0
-    }
-
-    @JsonDeserialize(using = InAppPriceConsentStatusDeserializer.class)
-    public enum PriceConsentStatus {
-        AGREED,     // 1
-        NO_ACTION   // 0
-    }
 }
