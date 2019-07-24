@@ -29,7 +29,6 @@ public class VerifyReceiptResponseTest {
         Assertions.assertEquals(1, value.getLatestReceiptInfo().size());
         Assertions.assertEquals(1, value.getPendingRenewalInfo().size());
         Assertions.assertNotNull(value.getPendingRenewalInfo().get(0));
-        Assertions.assertNotNull(value.getLatestExpiredReceiptInfo());
         Assertions.assertEquals(Boolean.TRUE, value.getRetryable());
         Assertions.assertEquals(VerifyReceiptResponse.Environment.PRODUCTION, value.getEnvironment());
     }

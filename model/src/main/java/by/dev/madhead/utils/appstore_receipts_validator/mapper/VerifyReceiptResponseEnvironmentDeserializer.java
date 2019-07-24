@@ -10,11 +10,9 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import java.io.IOException;
 
 public class VerifyReceiptResponseEnvironmentDeserializer extends StdScalarDeserializer<VerifyReceiptResponse.Environment> {
-
     public VerifyReceiptResponseEnvironmentDeserializer() {
         super(VerifyReceiptResponse.Environment.class);
     }
-
 
     @Override
     public VerifyReceiptResponse.Environment deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {

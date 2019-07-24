@@ -1,9 +1,9 @@
 package by.dev.madhead.utils.appstore_receipts_validator.model;
 
-import by.dev.madhead.utils.appstore_receipts_validator.mapper.PendingRenewalPriceConsentStatusDeserializer;
+import by.dev.madhead.utils.appstore_receipts_validator.mapper.PendingRenewalAutoRenewStatusDeserializer;
 import by.dev.madhead.utils.appstore_receipts_validator.mapper.PendingRenewalBillingRetryPeriodDeserializer;
 import by.dev.madhead.utils.appstore_receipts_validator.mapper.PendingRenewalExpirationIntentDeserializer;
-import by.dev.madhead.utils.appstore_receipts_validator.mapper.PendingRenewalAutoRenewStatusDeserializer;
+import by.dev.madhead.utils.appstore_receipts_validator.mapper.PendingRenewalPriceConsentStatusDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 public final class PendingRenewal {
-
     @JsonProperty("auto_renew_product_id")
     private String autoRenewProductId;
 
@@ -106,7 +105,15 @@ public final class PendingRenewal {
 
     @Override
     public int hashCode() {
-        return Objects.hash(autoRenewProductId, autoRenewStatus, expirationIntent, inBillingRetryPeriod, originalTransactionId, priceConsentStatus, productId);
+        return Objects.hash(
+            autoRenewProductId,
+            autoRenewStatus,
+            expirationIntent,
+            inBillingRetryPeriod,
+            originalTransactionId,
+            priceConsentStatus,
+            productId
+        );
     }
 
     @Override
@@ -122,6 +129,12 @@ public final class PendingRenewal {
             .toString();
     }
 
+    @JsonDeserialize(using = PendingRenewalAutoRenewStatusDeserializer.class)
+    public enum AutoRenewStatus {
+        ON, // 1
+        OFF // 0
+    }
+
     @JsonDeserialize(using = PendingRenewalExpirationIntentDeserializer.class)
     public enum ExpirationIntent {
         CUSTOMER_CANCELED,       // 1
@@ -131,17 +144,9 @@ public final class PendingRenewal {
         UNKNOWN_ERROR            // 5
     }
 
-    @JsonDeserialize(using = PendingRenewalAutoRenewStatusDeserializer.class)
-    public enum AutoRenewStatus {
-        ON, // 1
-        OFF // 0
-    }
-
     @JsonDeserialize(using = PendingRenewalPriceConsentStatusDeserializer.class)
     public enum PriceConsentStatus {
         AGREED,     // 1
         NO_ACTION   // 0
     }
-
 }
-

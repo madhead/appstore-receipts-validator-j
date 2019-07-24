@@ -11,27 +11,48 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 public final class Receipt {
-
     @JsonProperty("adam_id")
     private Long adamId;
 
     @JsonProperty("app_item_id")
     private Long appItemId;
 
-    @JsonProperty("bundle_id")
-    private String bundleId;
-
     @JsonProperty("application_version")
     private String applicationVersion;
 
+    @JsonProperty("bundle_id")
+    private String bundleId;
+
     @JsonProperty("download_id")
     private Long downloadId;
+
+    @JsonProperty("expiration_date")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
+    private ZonedDateTime expirationDate;
+
+    @JsonProperty("expiration_date_ms")
+    private Long expirationDateMs;
+
+    @JsonProperty("expiration_date_pst")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
+    private ZonedDateTime expirationDatePst;
 
     @JsonProperty("in_app")
     private List<InApp> inApp;
 
     @JsonProperty("original_application_version")
     private String originalApplicationVersion;
+
+    @JsonProperty("original_purchase_date")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
+    private ZonedDateTime originalPurchaseDate;
+
+    @JsonProperty("original_purchase_date_ms")
+    private Long originalPurchaseDateMs;
+
+    @JsonProperty("original_purchase_date_pst")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
+    private ZonedDateTime originalPurchaseDatePst;
 
     @JsonProperty("receipt_creation_date")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
@@ -46,28 +67,6 @@ public final class Receipt {
 
     @JsonProperty("receipt_type")
     private ReceiptType receiptType;
-
-    @JsonProperty("expiration_date")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
-    private ZonedDateTime expirationDate;
-
-    @JsonProperty("expiration_date_ms")
-    private Long expirationDateMs;
-
-    @JsonProperty("expiration_date_pst")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
-    private ZonedDateTime expirationDatePst;
-
-    @JsonProperty("original_purchase_date")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
-    private ZonedDateTime originalPurchaseDate;
-
-    @JsonProperty("original_purchase_date_ms")
-    private Long originalPurchaseDateMs;
-
-    @JsonProperty("original_purchase_date_pst")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
-    private ZonedDateTime originalPurchaseDatePst;
 
     @JsonProperty("request_date")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss VV")
@@ -99,14 +98,6 @@ public final class Receipt {
         this.appItemId = appItemId;
     }
 
-    public String getBundleId() {
-        return bundleId;
-    }
-
-    public void setBundleId(String bundleId) {
-        this.bundleId = bundleId;
-    }
-
     public String getApplicationVersion() {
         return applicationVersion;
     }
@@ -115,12 +106,44 @@ public final class Receipt {
         this.applicationVersion = applicationVersion;
     }
 
+    public String getBundleId() {
+        return bundleId;
+    }
+
+    public void setBundleId(String bundleId) {
+        this.bundleId = bundleId;
+    }
+
     public Long getDownloadId() {
         return downloadId;
     }
 
     public void setDownloadId(Long downloadId) {
         this.downloadId = downloadId;
+    }
+
+    public ZonedDateTime getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(ZonedDateTime expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public Long getExpirationDateMs() {
+        return expirationDateMs;
+    }
+
+    public void setExpirationDateMs(Long expirationDateMs) {
+        this.expirationDateMs = expirationDateMs;
+    }
+
+    public ZonedDateTime getExpirationDatePst() {
+        return expirationDatePst;
+    }
+
+    public void setExpirationDatePst(ZonedDateTime expirationDatePst) {
+        this.expirationDatePst = expirationDatePst;
     }
 
     public List<InApp> getInApp() {
@@ -137,6 +160,30 @@ public final class Receipt {
 
     public void setOriginalApplicationVersion(String originalApplicationVersion) {
         this.originalApplicationVersion = originalApplicationVersion;
+    }
+
+    public ZonedDateTime getOriginalPurchaseDate() {
+        return originalPurchaseDate;
+    }
+
+    public void setOriginalPurchaseDate(ZonedDateTime originalPurchaseDate) {
+        this.originalPurchaseDate = originalPurchaseDate;
+    }
+
+    public Long getOriginalPurchaseDateMs() {
+        return originalPurchaseDateMs;
+    }
+
+    public void setOriginalPurchaseDateMs(Long originalPurchaseDateMs) {
+        this.originalPurchaseDateMs = originalPurchaseDateMs;
+    }
+
+    public ZonedDateTime getOriginalPurchaseDatePst() {
+        return originalPurchaseDatePst;
+    }
+
+    public void setOriginalPurchaseDatePst(ZonedDateTime originalPurchaseDatePst) {
+        this.originalPurchaseDatePst = originalPurchaseDatePst;
     }
 
     public ZonedDateTime getReceiptCreationDate() {
@@ -169,54 +216,6 @@ public final class Receipt {
 
     public void setReceiptType(ReceiptType receiptType) {
         this.receiptType = receiptType;
-    }
-
-    public ZonedDateTime getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(ZonedDateTime expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
-    public Long getExpirationDateMs() {
-        return expirationDateMs;
-    }
-
-    public void setExpirationDateMs(Long expirationDateMs) {
-        this.expirationDateMs = expirationDateMs;
-    }
-
-    public ZonedDateTime getExpirationDatePst() {
-        return expirationDatePst;
-    }
-
-    public void setExpirationDatePst(ZonedDateTime expirationDatePst) {
-        this.expirationDatePst = expirationDatePst;
-    }
-
-    public ZonedDateTime getOriginalPurchaseDate() {
-        return originalPurchaseDate;
-    }
-
-    public void setOriginalPurchaseDate(ZonedDateTime originalPurchaseDate) {
-        this.originalPurchaseDate = originalPurchaseDate;
-    }
-
-    public Long getOriginalPurchaseDateMs() {
-        return originalPurchaseDateMs;
-    }
-
-    public void setOriginalPurchaseDateMs(Long originalPurchaseDateMs) {
-        this.originalPurchaseDateMs = originalPurchaseDateMs;
-    }
-
-    public ZonedDateTime getOriginalPurchaseDatePst() {
-        return originalPurchaseDatePst;
-    }
-
-    public void setOriginalPurchaseDatePst(ZonedDateTime originalPurchaseDatePst) {
-        this.originalPurchaseDatePst = originalPurchaseDatePst;
     }
 
     public ZonedDateTime getRequestDate() {
@@ -258,21 +257,21 @@ public final class Receipt {
         Receipt receipt = (Receipt) o;
         return Objects.equals(adamId, receipt.adamId) &&
             Objects.equals(appItemId, receipt.appItemId) &&
-            Objects.equals(bundleId, receipt.bundleId) &&
             Objects.equals(applicationVersion, receipt.applicationVersion) &&
+            Objects.equals(bundleId, receipt.bundleId) &&
             Objects.equals(downloadId, receipt.downloadId) &&
+            Objects.equals(expirationDate, receipt.expirationDate) &&
+            Objects.equals(expirationDateMs, receipt.expirationDateMs) &&
+            Objects.equals(expirationDatePst, receipt.expirationDatePst) &&
             Objects.equals(inApp, receipt.inApp) &&
             Objects.equals(originalApplicationVersion, receipt.originalApplicationVersion) &&
+            Objects.equals(originalPurchaseDate, receipt.originalPurchaseDate) &&
+            Objects.equals(originalPurchaseDateMs, receipt.originalPurchaseDateMs) &&
+            Objects.equals(originalPurchaseDatePst, receipt.originalPurchaseDatePst) &&
             Objects.equals(receiptCreationDate, receipt.receiptCreationDate) &&
             Objects.equals(receiptCreationDateMs, receipt.receiptCreationDateMs) &&
             Objects.equals(receiptCreationDatePst, receipt.receiptCreationDatePst) &&
             receiptType == receipt.receiptType &&
-            Objects.equals(expirationDate, receipt.expirationDate) &&
-            Objects.equals(expirationDateMs, receipt.expirationDateMs) &&
-            Objects.equals(expirationDatePst, receipt.expirationDatePst) &&
-            Objects.equals(originalPurchaseDate, receipt.originalPurchaseDate) &&
-            Objects.equals(originalPurchaseDateMs, receipt.originalPurchaseDateMs) &&
-            Objects.equals(originalPurchaseDatePst, receipt.originalPurchaseDatePst) &&
             Objects.equals(requestDate, receipt.requestDate) &&
             Objects.equals(requestDateMs, receipt.requestDateMs) &&
             Objects.equals(requestDatePst, receipt.requestDatePst) &&
@@ -281,7 +280,29 @@ public final class Receipt {
 
     @Override
     public int hashCode() {
-        return Objects.hash(adamId, appItemId, bundleId, applicationVersion, downloadId, inApp, originalApplicationVersion, receiptCreationDate, receiptCreationDateMs, receiptCreationDatePst, receiptType, expirationDate, expirationDateMs, expirationDatePst, originalPurchaseDate, originalPurchaseDateMs, originalPurchaseDatePst, requestDate, requestDateMs, requestDatePst, versionExternalIdentifier);
+        return Objects.hash(
+            adamId,
+            appItemId,
+            applicationVersion,
+            bundleId,
+            downloadId,
+            expirationDate,
+            expirationDateMs,
+            expirationDatePst,
+            inApp,
+            originalApplicationVersion,
+            originalPurchaseDate,
+            originalPurchaseDateMs,
+            originalPurchaseDatePst,
+            receiptCreationDate,
+            receiptCreationDateMs,
+            receiptCreationDatePst,
+            receiptType,
+            requestDate,
+            requestDateMs,
+            requestDatePst,
+            versionExternalIdentifier
+        );
     }
 
     @Override
@@ -289,21 +310,21 @@ public final class Receipt {
         return new StringJoiner(", ", Receipt.class.getSimpleName() + "[", "]")
             .add("adamId=" + adamId)
             .add("appItemId=" + appItemId)
-            .add("bundleId='" + bundleId + "'")
             .add("applicationVersion='" + applicationVersion + "'")
+            .add("bundleId='" + bundleId + "'")
             .add("downloadId=" + downloadId)
+            .add("expirationDate=" + expirationDate)
+            .add("expirationDateMs=" + expirationDateMs)
+            .add("expirationDatePst=" + expirationDatePst)
             .add("inApp=" + inApp)
             .add("originalApplicationVersion='" + originalApplicationVersion + "'")
+            .add("originalPurchaseDate=" + originalPurchaseDate)
+            .add("originalPurchaseDateMs=" + originalPurchaseDateMs)
+            .add("originalPurchaseDatePst=" + originalPurchaseDatePst)
             .add("receiptCreationDate=" + receiptCreationDate)
             .add("receiptCreationDateMs=" + receiptCreationDateMs)
             .add("receiptCreationDatePst=" + receiptCreationDatePst)
             .add("receiptType=" + receiptType)
-            .add("expirationDate=" + expirationDate)
-            .add("expirationDateMs=" + expirationDateMs)
-            .add("expirationDatePst=" + expirationDatePst)
-            .add("originalPurchaseDate=" + originalPurchaseDate)
-            .add("originalPurchaseDateMs=" + originalPurchaseDateMs)
-            .add("originalPurchaseDatePst=" + originalPurchaseDatePst)
             .add("requestDate=" + requestDate)
             .add("requestDateMs=" + requestDateMs)
             .add("requestDatePst=" + requestDatePst)
@@ -318,5 +339,4 @@ public final class Receipt {
         PRODUCTIONSANDBOX,
         PRODUCTIONVPPSANDBOX
     }
-
 }

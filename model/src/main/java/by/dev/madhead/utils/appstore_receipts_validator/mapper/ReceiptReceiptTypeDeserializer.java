@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import java.io.IOException;
 
 public class ReceiptReceiptTypeDeserializer extends StdScalarDeserializer<Receipt.ReceiptType> {
-
     public ReceiptReceiptTypeDeserializer() {
         super(Receipt.ReceiptType.class);
     }
