@@ -33,10 +33,3 @@ subprojects {
         key = System.getenv("BINTRAY_KEY")
     }
 }
-
-tasks {
-    wrapper {
-        gradleVersion = "5.0"
-        distributionType = Wrapper.DistributionType.ALL
-    }
-}
