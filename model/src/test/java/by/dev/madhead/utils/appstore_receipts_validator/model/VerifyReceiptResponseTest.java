@@ -12,7 +12,7 @@ public class VerifyReceiptResponseTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    private void bedoreEach() {
+    private void beforeEach() {
         this.objectMapper = ObjectMapperFactory.defaultObjectMapper();
     }
 
@@ -27,8 +27,10 @@ public class VerifyReceiptResponseTest {
         Assertions.assertNotNull(value.getReceipt());
         Assertions.assertEquals("latest_receipt", value.getLatestReceipt());
         Assertions.assertEquals(1, value.getLatestReceiptInfo().size());
-        Assertions.assertNotNull(value.getLatestExpiredReceiptInfo());
+        Assertions.assertEquals(1, value.getPendingRenewalInfo().size());
+        Assertions.assertNotNull(value.getPendingRenewalInfo().get(0));
         Assertions.assertEquals(Boolean.TRUE, value.getRetryable());
+        Assertions.assertEquals(VerifyReceiptResponse.Environment.PRODUCTION, value.getEnvironment());
     }
 
     @Test

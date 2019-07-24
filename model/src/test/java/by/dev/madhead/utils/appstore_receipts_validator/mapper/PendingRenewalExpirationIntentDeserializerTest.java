@@ -1,6 +1,6 @@
 package by.dev.madhead.utils.appstore_receipts_validator.mapper;
 
-import by.dev.madhead.utils.appstore_receipts_validator.model.InApp;
+import by.dev.madhead.utils.appstore_receipts_validator.model.PendingRenewal;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,23 +13,23 @@ import org.junit.jupiter.params.provider.EnumSource;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class InAppExpirationIntentDeserializerTest {
+public class PendingRenewalExpirationIntentDeserializerTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    private void bedoreEach() {
+    private void beforeEach() {
         this.objectMapper = ObjectMapperFactory.defaultObjectMapper();
     }
 
     @ParameterizedTest
-    @EnumSource(InApp.ExpirationIntent.class)
-    public void testDeserialization(final InApp.ExpirationIntent value) throws Exception {
+    @EnumSource(PendingRenewal.ExpirationIntent.class)
+    public void testDeserialization(final PendingRenewal.ExpirationIntent value) throws Exception {
         Assertions.assertEquals(
             new ExpirationIntentHolder(
                 value
             ),
             objectMapper.readValue(
-                getClass().getResource("InAppExpirationIntentDeserializerTest/testDeserialization_" + value.name() + ".json"),
+                getClass().getResource("PendingRenewalExpirationIntentDeserializerTest/testDeserialization_" + value.name() + ".json"),
                 ExpirationIntentHolder.class
             )
         );
@@ -40,7 +40,7 @@ public class InAppExpirationIntentDeserializerTest {
         Assertions.assertThrows(
             JsonMappingException.class,
             () -> objectMapper.readValue(
-                getClass().getResource("InAppExpirationIntentDeserializerTest/testDeserializationUnknownValue.json"),
+                getClass().getResource("PendingRenewalExpirationIntentDeserializerTest/testDeserializationUnknownValue.json"),
                 ExpirationIntentHolder.class
             )
         );
@@ -51,7 +51,7 @@ public class InAppExpirationIntentDeserializerTest {
         Assertions.assertThrows(
             JsonMappingException.class,
             () -> objectMapper.readValue(
-                getClass().getResource("InAppExpirationIntentDeserializerTest/testDeserializationInvalidValue.json"),
+                getClass().getResource("PendingRenewalExpirationIntentDeserializerTest/testDeserializationInvalidValue.json"),
                 ExpirationIntentHolder.class
             )
         );
@@ -59,20 +59,20 @@ public class InAppExpirationIntentDeserializerTest {
 
     private static class ExpirationIntentHolder {
         @JsonProperty("expiration_intent")
-        private InApp.ExpirationIntent expirationIntent;
+        private PendingRenewal.ExpirationIntent expirationIntent;
 
         public ExpirationIntentHolder() {
         }
 
-        public ExpirationIntentHolder(final InApp.ExpirationIntent expirationIntent) {
+        public ExpirationIntentHolder(final PendingRenewal.ExpirationIntent expirationIntent) {
             this.expirationIntent = expirationIntent;
         }
 
-        public InApp.ExpirationIntent getExpirationIntent() {
+        public PendingRenewal.ExpirationIntent getExpirationIntent() {
             return expirationIntent;
         }
 
-        public void setExpirationIntent(final InApp.ExpirationIntent expirationIntent) {
+        public void setExpirationIntent(final PendingRenewal.ExpirationIntent expirationIntent) {
             this.expirationIntent = expirationIntent;
         }
 

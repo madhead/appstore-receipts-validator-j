@@ -16,7 +16,7 @@ public class ReceiptTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    private void bedoreEach() {
+    private void beforeEach() {
         this.objectMapper = ObjectMapperFactory.defaultObjectMapper();
     }
 
@@ -32,10 +32,43 @@ public class ReceiptTest {
             ZonedDateTime.of(LocalDateTime.of(2018, 9, 23, 3, 42, 42), ZoneId.of("Etc/GMT")).toInstant(),
             value.getReceiptCreationDate().toInstant()
         );
+        Assertions.assertEquals(Long.valueOf(1563494400000L), value.getReceiptCreationDateMs());
+        Assertions.assertEquals(
+            ZonedDateTime.of(LocalDateTime.of(2019, 7, 18, 17, 00, 00), ZoneId.of("America/Los_Angeles")).toInstant(),
+            value.getReceiptCreationDatePst().toInstant()
+        );
+        Assertions.assertEquals(
+            ZonedDateTime.of(LocalDateTime.of(2019, 7, 23, 9, 00, 00), ZoneId.of("Etc/GMT")).toInstant(),
+            value.getRequestDate().toInstant()
+        );
+        Assertions.assertEquals(Long.valueOf(1563875196800L), value.getRequestDateMs());
+        Assertions.assertEquals(
+            ZonedDateTime.of(LocalDateTime.of(2019, 7, 23, 2, 00, 00), ZoneId.of("America/Los_Angeles")).toInstant(),
+            value.getRequestDatePst().toInstant()
+        );
         Assertions.assertEquals(
             ZonedDateTime.of(LocalDateTime.of(2019, 9, 23, 3, 42, 42), ZoneId.of("Etc/GMT")).toInstant(),
             value.getExpirationDate().toInstant()
         );
+        Assertions.assertEquals(Long.valueOf(1563875196800L), value.getExpirationDateMs());
+        Assertions.assertEquals(
+            ZonedDateTime.of(LocalDateTime.of(2019, 7, 23, 2, 00, 00), ZoneId.of("America/Los_Angeles")).toInstant(),
+            value.getExpirationDatePst().toInstant()
+        );
+        Assertions.assertEquals(
+            ZonedDateTime.of(LocalDateTime.of(2019, 9, 23, 3, 42, 42), ZoneId.of("Etc/GMT")).toInstant(),
+            value.getOriginalPurchaseDate().toInstant()
+        );
+        Assertions.assertEquals(Long.valueOf(1563875196800L), value.getOriginalPurchaseDateMs());
+        Assertions.assertEquals(
+            ZonedDateTime.of(LocalDateTime.of(2019, 7, 23, 2, 00, 00), ZoneId.of("America/Los_Angeles")).toInstant(),
+            value.getOriginalPurchaseDatePst().toInstant()
+        );
+        Assertions.assertEquals(Long.valueOf(32051403290714L), value.getDownloadId());
+        Assertions.assertEquals(Long.valueOf(141916214L), value.getVersionExternalIdentifier());
+        Assertions.assertEquals(Long.valueOf(141916214L), value.getAdamId());
+        Assertions.assertEquals(Long.valueOf(141916214L), value.getAppItemId());
+        Assertions.assertEquals(Receipt.ReceiptType.PRODUCTION, value.getReceiptType());
     }
 
     @Test

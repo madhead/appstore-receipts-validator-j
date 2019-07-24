@@ -1,6 +1,5 @@
 package by.dev.madhead.utils.appstore_receipts_validator.mapper;
 
-import by.dev.madhead.utils.appstore_receipts_validator.model.InApp;
 import by.dev.madhead.utils.appstore_receipts_validator.model.VerifyReceiptResponse;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
@@ -18,7 +17,7 @@ public class VerifyReceiptResponseStatusDeserializer extends StdScalarDeserializ
     @Override
     public VerifyReceiptResponse.Status deserialize(final JsonParser p, final DeserializationContext ctxt) throws IOException {
         if (p.currentToken() != JsonToken.VALUE_NUMBER_INT) {
-            throw new InvalidFormatException(p, "Invalid Verify Receipt Response Status", null, InApp.PriceConsentStatus.class);
+            throw new InvalidFormatException(p, "Invalid Verify Receipt Response Status", null, VerifyReceiptResponse.Status.class);
         } else {
             final int value = p.getValueAsInt();
 
@@ -46,7 +45,7 @@ public class VerifyReceiptResponseStatusDeserializer extends StdScalarDeserializ
                     if ((21100 <= value) && (value <= 21199)) {
                         return VerifyReceiptResponse.Status.INTERNAL_ERROR;
                     } else {
-                        throw new InvalidFormatException(p, "Unknown Verify Receipt Response Status", null, InApp.PriceConsentStatus.class);
+                        throw new InvalidFormatException(p, "Unknown Verify Receipt Response Status", null, VerifyReceiptResponse.Status.class);
                     }
             }
         }

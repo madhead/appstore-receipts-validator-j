@@ -8,8 +8,8 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 import java.io.IOException;
 
-public class InAppBillingRetryPeriodDeserializer extends StdScalarDeserializer<Boolean> {
-    protected InAppBillingRetryPeriodDeserializer() {
+public class PendingRenewalBillingRetryPeriodDeserializer extends StdScalarDeserializer<Boolean> {
+    protected PendingRenewalBillingRetryPeriodDeserializer() {
         super(Boolean.class);
     }
 

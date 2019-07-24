@@ -13,11 +13,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class InAppBillingRetryPeriodDeserializerTest {
+public class PendingRenewalBillingRetryPeriodDeserializerTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    private void bedoreEach() {
+    private void beforeEach() {
         this.objectMapper = ObjectMapperFactory.defaultObjectMapper();
     }
 
@@ -29,7 +29,7 @@ public class InAppBillingRetryPeriodDeserializerTest {
                 Boolean.valueOf(value)
             ),
             objectMapper.readValue(
-                getClass().getResource("InAppBillingRetryPeriodDeserializerTest/testDeserialization_" + value + ".json"),
+                getClass().getResource("PendingRenewalBillingRetryPeriodDeserializerTest/testDeserialization_" + value + ".json"),
                 BillingRetryPeriodHolder.class
             )
         );
@@ -40,7 +40,7 @@ public class InAppBillingRetryPeriodDeserializerTest {
         Assertions.assertThrows(
             JsonMappingException.class,
             () -> objectMapper.readValue(
-                getClass().getResource("InAppBillingRetryPeriodDeserializerTest/testDeserializationUnknownValue.json"),
+                getClass().getResource("PendingRenewalBillingRetryPeriodDeserializerTest/testDeserializationUnknownValue.json"),
                 BillingRetryPeriodHolder.class
             )
         );
@@ -51,7 +51,7 @@ public class InAppBillingRetryPeriodDeserializerTest {
         Assertions.assertThrows(
             JsonMappingException.class,
             () -> objectMapper.readValue(
-                getClass().getResource("InAppBillingRetryPeriodDeserializerTest/testDeserializationInvalidValue.json"),
+                getClass().getResource("PendingRenewalBillingRetryPeriodDeserializerTest/testDeserializationInvalidValue.json"),
                 BillingRetryPeriodHolder.class
             )
         );
@@ -59,7 +59,7 @@ public class InAppBillingRetryPeriodDeserializerTest {
 
     private static class BillingRetryPeriodHolder {
         @JsonProperty("is_in_billing_retry_period")
-        @JsonDeserialize(using = InAppBillingRetryPeriodDeserializer.class)
+        @JsonDeserialize(using = PendingRenewalBillingRetryPeriodDeserializer.class)
         private Boolean inBillingRetryPeriod;
 
         public BillingRetryPeriodHolder() {

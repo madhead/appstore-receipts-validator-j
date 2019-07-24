@@ -1,5 +1,6 @@
 package by.dev.madhead.utils.appstore_receipts_validator.model;
 
+import by.dev.madhead.utils.appstore_receipts_validator.mapper.VerifyReceiptResponseEnvironmentDeserializer;
 import by.dev.madhead.utils.appstore_receipts_validator.mapper.VerifyReceiptResponseStatusDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -9,11 +10,11 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 public final class VerifyReceiptResponse {
-    @JsonProperty("status")
-    private Status status;
+    @JsonProperty("environment")
+    private Environment environment;
 
-    @JsonProperty("receipt")
-    private Receipt receipt;
+    @JsonProperty("is-retryable")
+    private Boolean retryable;
 
     @JsonProperty("latest_receipt")
     private String latestReceipt;
@@ -21,36 +22,36 @@ public final class VerifyReceiptResponse {
     @JsonProperty("latest_receipt_info")
     private List<InApp> latestReceiptInfo;
 
-    @JsonProperty("latest_expired_receipt_info")
-    private Receipt latestExpiredReceiptInfo;
-
     @JsonProperty("pending_renewal_info")
     private List<PendingRenewal> pendingRenewalInfo;
 
-    @JsonProperty("is-retryable")
-    private Boolean retryable;
+    @JsonProperty("receipt")
+    private Receipt receipt;
 
-    public Status getStatus() {
-        return status;
+    @JsonProperty("status")
+    private Status status;
+
+    public Environment getEnvironment() {
+        return environment;
     }
 
-    public void setStatus(final Status status) {
-        this.status = status;
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 
-    public Receipt getReceipt() {
-        return receipt;
+    public Boolean getRetryable() {
+        return retryable;
     }
 
-    public void setReceipt(final Receipt receipt) {
-        this.receipt = receipt;
+    public void setRetryable(Boolean retryable) {
+        this.retryable = retryable;
     }
 
     public String getLatestReceipt() {
         return latestReceipt;
     }
 
-    public void setLatestReceipt(final String latestReceipt) {
+    public void setLatestReceipt(String latestReceipt) {
         this.latestReceipt = latestReceipt;
     }
 
@@ -58,70 +59,78 @@ public final class VerifyReceiptResponse {
         return latestReceiptInfo;
     }
 
-    public void setLatestReceiptInfo(final List<InApp> latestReceiptInfo) {
+    public void setLatestReceiptInfo(List<InApp> latestReceiptInfo) {
         this.latestReceiptInfo = latestReceiptInfo;
-    }
-
-    public Receipt getLatestExpiredReceiptInfo() {
-        return latestExpiredReceiptInfo;
-    }
-
-    public void setLatestExpiredReceiptInfo(final Receipt latestExpiredReceiptInfo) {
-        this.latestExpiredReceiptInfo = latestExpiredReceiptInfo;
     }
 
     public List<PendingRenewal> getPendingRenewalInfo() {
         return pendingRenewalInfo;
     }
 
-    public void setPendingRenewalInfo(final List<PendingRenewal> pendingRenewalInfo) {
+    public void setPendingRenewalInfo(List<PendingRenewal> pendingRenewalInfo) {
         this.pendingRenewalInfo = pendingRenewalInfo;
     }
 
-    public Boolean getRetryable() {
-        return retryable;
+    public Receipt getReceipt() {
+        return receipt;
     }
 
-    public void setRetryable(final Boolean retryable) {
-        this.retryable = retryable;
+    public void setReceipt(Receipt receipt) {
+        this.receipt = receipt;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        final VerifyReceiptResponse that = (VerifyReceiptResponse) o;
-
-        return status == that.status &&
-               Objects.equals(receipt, that.receipt) &&
-               Objects.equals(latestReceipt, that.latestReceipt) &&
-               Objects.equals(latestReceiptInfo, that.latestReceiptInfo) &&
-               Objects.equals(latestExpiredReceiptInfo, that.latestExpiredReceiptInfo) &&
-               Objects.equals(pendingRenewalInfo, that.pendingRenewalInfo) &&
-               Objects.equals(retryable, that.retryable);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VerifyReceiptResponse that = (VerifyReceiptResponse) o;
+        return environment == that.environment &&
+            Objects.equals(retryable, that.retryable) &&
+            Objects.equals(latestReceipt, that.latestReceipt) &&
+            Objects.equals(latestReceiptInfo, that.latestReceiptInfo) &&
+            Objects.equals(pendingRenewalInfo, that.pendingRenewalInfo) &&
+            Objects.equals(receipt, that.receipt) &&
+            status == that.status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(status, receipt, latestReceipt, latestReceiptInfo, latestExpiredReceiptInfo, pendingRenewalInfo, retryable);
+        return Objects.hash(
+            environment,
+            retryable,
+            latestReceipt,
+            latestReceiptInfo,
+            pendingRenewalInfo,
+            receipt,
+            status
+        );
     }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", VerifyReceiptResponse.class.getSimpleName() + "[", "]")
-            .add("status=" + status)
-            .add("receipt=" + receipt)
+            .add("environment=" + environment)
+            .add("retryable=" + retryable)
             .add("latestReceipt='" + latestReceipt + "'")
             .add("latestReceiptInfo=" + latestReceiptInfo)
-            .add("latestExpiredReceiptInfo=" + latestExpiredReceiptInfo)
             .add("pendingRenewalInfo=" + pendingRenewalInfo)
-            .add("retryable=" + retryable)
+            .add("receipt=" + receipt)
+            .add("status=" + status)
             .toString();
+    }
+
+    @JsonDeserialize(using = VerifyReceiptResponseEnvironmentDeserializer.class)
+    public enum Environment {
+        SANDBOX,
+        PRODUCTION
     }
 
     @JsonDeserialize(using = VerifyReceiptResponseStatusDeserializer.class)
